@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_new_customer_account"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="20dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical"
+    tools:context="com.collo.phemwaresolutions.collonetworks.NewCustomerAccountActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spinnerTitle"
+                style="@android:style/Widget.Holo.Light.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:animateLayoutChanges="true"
+                android:entries="@array/title_arrays"
+                android:minHeight="10dp"
+                android:spinnerMode="dropdown" />
+
+            <EditText
+                android:id="@+id/txtFirstName"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/enter_first_name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/txtLastName"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/last_name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/txtMiddleName"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/middle_name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/txtCompany"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/company"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/txtAddress"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/address"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/txtCity"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/city"
+                android:inputType="text" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spinnerState"
+                style="@android:style/Widget.Holo.Light.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="15dp"
+                android:minHeight="10dp"
+                android:spinnerMode="dialog" />
+
+            <EditText
+                android:id="@+id/txtPhone"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/phone_number"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/txtEmail"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/enter_email"
+                android:inputType="textEmailAddress" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spinnerGender"
+                style="@android:style/Widget.Holo.Light.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:animateLayoutChanges="true"
+                android:entries="@array/gender_arrays"
+                android:minHeight="15dp"
+                android:spinnerMode="dialog" />
+
+            <EditText
+                android:id="@+id/txtOccupation"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Occupation"
+                android:inputType="textAutoComplete" />
+
+            <EditText
+                android:id="@+id/txtCustomerPin"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Customer Pin"
+                android:inputType="numberPassword" />
+
+            <EditText
+                android:id="@+id/txtCustomerConfirmPin"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Confirm Pin"
+                android:inputType="numberPassword" />
+
+            <EditText
+                android:id="@+id/txtCustomerPassword"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Customer Password"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/txtCustomerConfirmPassword"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Confirm Password"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/txtAge"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/date_of_birth"
+                android:inputType="none"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/btnNextPicture"
+                style="@style/myMarginTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorActionButton"
+                android:onClick="gotoTakePicture"
+                android:text="@string/next"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

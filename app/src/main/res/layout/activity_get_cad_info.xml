@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_get_cad_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="1"
+    tools:context="com.collo.phemwaresolutions.collonetworks.GetCadInfoActivity">
+
+    <TextView
+        android:layout_marginBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Swipe Card First"
+        android:textSize="25sp" />
+
+    <TextView
+        android:layout_marginBottom="15dp"
+        android:id="@+id/txtCardDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Card Details = "
+        android:textSize="25sp" />
+
+
+    <TextView
+        android:layout_marginBottom="15dp"
+        android:id="@+id/txtPanNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="PAN = "
+        android:textSize="25sp" />
+
+    <TextView
+        android:layout_marginBottom="15dp"
+        android:id="@+id/txtExpire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Expire Date = "
+        android:textSize="25sp" />
+
+    <TextView
+        android:layout_marginBottom="15dp"
+        android:id="@+id/txtServiceCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="0.60"
+        android:text="Service Code = "
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/getCardDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorActionButton"
+        android:onClick="getMagneticReaderInfo"
+        android:text="Get Card Details"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+</LinearLayout>
