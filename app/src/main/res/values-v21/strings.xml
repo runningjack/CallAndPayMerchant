@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string state="middle_name">Middle Name</string>
-    <string state="select_city" />
-    <string state="select_state" />
+    <string states="middle_name">Middle Name</string>
+    <string states="select_city" />
+    <string states="select_state" />
 </resources>

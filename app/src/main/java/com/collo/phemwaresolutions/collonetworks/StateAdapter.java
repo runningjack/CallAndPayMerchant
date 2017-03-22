@@ -1,24 +1,21 @@
 package com.collo.phemwaresolutions.collonetworks;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 /**
  * Created by EntralogIT on 2017-03-16.
  */
-public class CountryAdapter extends ArrayAdapter<State> {
-    private Activity context;
+public class StateAdapter extends ArrayAdapter<State> {
     ArrayList<State> data = null;
+    private Activity context;
 
-    public CountryAdapter(Activity context, int resource,
-                          ArrayList<State> data) {
+    public StateAdapter(Activity context, int resource, ArrayList<State> data) {
         super(context, resource, data);
         this.context = context;
         this.data = data;

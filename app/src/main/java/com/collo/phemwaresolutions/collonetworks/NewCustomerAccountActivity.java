@@ -15,6 +15,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,24 +34,20 @@ import java.util.concurrent.ExecutionException;
 
 public class NewCustomerAccountActivity extends AppCompatActivity {
 
-    public static final String HOST_ADDRESS = "http://192.168.8.100/CallAndPayAPI/api";
-
-
-    private DatePickerDialog toDatePickerDialog;
+    public static final String HOST_ADDRESS = "http://192.168.11.156/CallAndPayAPI/api";
     SimpleDateFormat dateFormatter;
+    ArrayList<String> stateList = new ArrayList<>();
+    GlobalClassMethods gbc = new GlobalClassMethods();
+    private DatePickerDialog toDatePickerDialog;
     private EditText ageTxt;
     private DatePickerDialog ageDatePickerDialog;
-
     /* This is for web API */
     private BackGroundTask bgt;
-    ArrayList<State> stateList = new ArrayList<State>();
-
     private String TAG_DATA = "data";
     private Spinner stateField;
     private String TAG_ID_STATE;
     private String TAG_NAME;
     private String TAG_CURRENCY;
-    GlobalClassMethods gbc = new GlobalClassMethods();
     private TextView fnTxt;
     private Spinner titleSpin;
     private TextView lnTxt;
@@ -92,87 +95,61 @@ public class NewCustomerAccountActivity extends AppCompatActivity {
         pinTxt = (TextView) findViewById(R.id.txtCustomerPin);
         pwdTxt = (TextView) findViewById(R.id.txtCustomerPassword);
 
-        //states
-        //buildStatesDropDown();
 
+        buildStatesDropDown();
     }
 
-    private void buildStatesDropDown()
-    {
-        bgt = new BackGroundTask(HOST_ADDRESS+"/states", "GET");
-        try
-        {
-            JSONArray statesJSON = bgt.execute().get();
-            if (statesJSON != null)
-            {
-                // looping through All states
-                for (int i = 0; i < statesJSON.length(); i++) {
-                    JSONObject c = statesJSON.getJSONObject(i);
-                    // Storing each json item in variable
-                    String id = c.getString("Id");
-                    String name = c.getString("States");
+    private void buildStatesDropDown() {
+        final RequestQueue requestQueue = Volley.newRequestQueue(NewCustomerAccountActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, HOST_ADDRESS + "/states", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("VolleyResponse", String.valueOf(response));
+                try {
+                    JSONArray jsonarray = new JSONArray(String.valueOf(response));
+                    for (int i = 0; i < jsonarray.length(); i++) {
+                        JSONObject jsonobject = jsonarray.getJSONObject(i);
+                        int id = Integer.parseInt(jsonobject.getString("Id").toString());
+                        String states = jsonobject.getString("States").toString();
+                        stateList.add(states);
+                    }
+                    // bind adapter to spinner
+                    stateField = (Spinner) findViewById(R.id.spinnerState);
+                    ArrayAdapter<String> stateArrayAdapter = new ArrayAdapter<String>(NewCustomerAccountActivity.this, android.R.layout.simple_spinner_item, stateList);
+                    //selected item will look like a spinner set from XML
+                    stateArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    stateField.setAdapter(stateArrayAdapter);
+                    stateField.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        }
 
-                    // add state
-                    stateList.add(new State(id, name.toUpperCase()));
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+
+                    });
+
+                } catch (JSONException e) {
+                    Log.i("VolleyResponse", e.toString());
+                    e.printStackTrace();
                 }
 
-                // bind adapter to spinner
-                stateField = (Spinner) findViewById(R.id.spinnerState);
-                CountryAdapter cAdapter = new CountryAdapter(this, android.R.layout.simple_spinner_item, stateList);
-                stateField.setAdapter(cAdapter);
-
-                stateField.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        State selectedState = stateList.get(position);
-                        Toast.makeText(NewCustomerAccountActivity.this, selectedState.getState() + " was selected!", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                    }
-
-                });
+                fnTxt.setText(response);
+                requestQueue.stop();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void getListOfStates() {
-        ArrayList<State> states = new ArrayList<State>();
-        ArrayList<String> stateNames = new ArrayList<String>();
-
-        try {
-            JSONObject json = new JSONObject("");
-            JSONArray jsonArray = new JSONArray(json.optString("states"));
-            Log.i(NewCustomerAccountActivity.class.getName(), "Number of entries " + jsonArray.length());
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                State dState = new State();
-                dState.setState(jsonObject.optString("State"));
-                dState.setId(jsonObject.optString("Id"));
-                states.add(dState);
-                stateNames.add(jsonObject.optString("State"));
-
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.e("VolleyResponse", String.valueOf(volleyError));
+                requestQueue.stop();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Spinner stateSpinner = (Spinner) findViewById(R.id.spinnerState);
-        stateSpinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, stateNames));
+        });
+        requestQueue.add(stringRequest);
     }
 
 
-    public void gotoTakePicture(View view)
-    {
+    public void gotoTakePicture(View view) {
         String p = constructAndPostCustomer();
         if (p == "1") {
             Intent i = new Intent(this, TakePictureActivity.class);
@@ -189,9 +166,9 @@ public class NewCustomerAccountActivity extends AppCompatActivity {
         //do the construct
         //bgt = new BackGroundTask(MAP_API_URL, "GET", apiParams);
         //you need to encode ONLY the values of the parameters
-        String param="";
+        String param = "";
         try {
-            param="param1=" + URLEncoder.encode("value1","UTF-8") + "&param2="+URLEncoder.encode("value2","UTF-8")+"&param3="+ URLEncoder.encode("value3","UTF-8");
+            param = "param1=" + URLEncoder.encode("value1", "UTF-8") + "&param2=" + URLEncoder.encode("value2", "UTF-8") + "&param3=" + URLEncoder.encode("value3", "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -200,16 +177,14 @@ public class NewCustomerAccountActivity extends AppCompatActivity {
         bgt = new BackGroundTask(HOST_ADDRESS + "/Customers", "GET");
         try {
             JSONArray result = bgt.execute().get();
-            if (result != null)
-            {
+            if (result != null) {
                 JSONObject object = new JSONObject(result.get(0).toString());// if you have only one element then get 0th index
                 JSONArray a = object.getJSONArray("data");
                 for (int i = 0; i < a.length(); ++i) {
                     Log.d("POST ERROR", a.getString(0));
                 }
                 return respId;
-            } else
-            {
+            } else {
                 Log.d("POST ERROR", "POST");
             }
         } catch (InterruptedException e) {

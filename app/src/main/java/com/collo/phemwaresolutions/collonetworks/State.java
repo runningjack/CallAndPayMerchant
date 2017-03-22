@@ -5,8 +5,12 @@ package com.collo.phemwaresolutions.collonetworks;
  */
 
 public class State {
+    private String states;
+    private String id;
+
+
     public State(String i, String name) {
-        state = name;
+        states = name;
         id = i;
     }
 
@@ -14,23 +18,19 @@ public class State {
 
     }
 
+    public String getStates() {
+        return states;
+    }
 
-    public String getState() {
-        return state;
+    public void setStates(String states) {
+        this.states = states;
     }
 
     public String getId() {
         return id;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public void setId(String id) {
         this.id = id;
     }
-
-    private String state;
-    private String id;
 }
