@@ -107,6 +107,7 @@ public class NewCustomerAccountActivity extends AppCompatActivity {
                 Log.i("VolleyResponse", String.valueOf(response));
                 try {
                     JSONArray jsonarray = new JSONArray(String.valueOf(response));
+                    stateList.add("Select State");
                     for (int i = 0; i < jsonarray.length(); i++) {
                         JSONObject jsonobject = jsonarray.getJSONObject(i);
                         int id = Integer.parseInt(jsonobject.getString("Id").toString());
@@ -135,7 +136,6 @@ public class NewCustomerAccountActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                fnTxt.setText(response);
                 requestQueue.stop();
             }
         }, new Response.ErrorListener() {
