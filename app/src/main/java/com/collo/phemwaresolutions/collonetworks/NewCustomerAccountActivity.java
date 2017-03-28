@@ -130,7 +130,6 @@ public class NewCustomerAccountActivity extends AppCompatActivity {
                         }
 
                     });
-
                 } catch (JSONException e) {
                     Log.i("VolleyResponse", e.toString());
                     e.printStackTrace();
